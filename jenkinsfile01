@@ -4,6 +4,9 @@ pipeline {
             label 'Default_agent'
         }
     }
+    triggers {
+    pollSCM '* * * * *'
+    }
     stages {
         stage('build') {
             steps {
