@@ -1,0 +1,24 @@
+pipeline {
+    agent {
+        node {
+            label 'Default_agent'
+        }
+    }
+    stages {
+        stage('build') {
+            steps {
+                echo "Building"
+            }
+        }
+        stage('test') {
+            steps{
+                echo "Testing"
+            }
+        }
+        stage('Deploy') {
+            steps {
+                echo "Deploying"
+            }
+        }
+    }
+}
