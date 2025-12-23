@@ -1,5 +1,10 @@
 pipeline {
     agent any
+    parameters {
+        string(name: 'check', defaultValue: 'This is a string', description: 'This is an example string')
+        choice(name: 'choose_colour', choices: ['Yellow', 'Blue', 'Orange'], description: 'This is to choose a colour')
+        booleanParam(name: 'choose_to_run_Stage_2', defaultValue: true, description: 'Choise to run step 2 or not')
+    }
     stages {
         stage('build') {
             steps {
@@ -7,13 +12,20 @@ pipeline {
             }
         }
         stage('test') {
+            when {
+                expression {
+                    params.choose_to_run_Stage_2
+                }
+            }
             steps{
                 echo "Testing"
+                
             }
         }
         stage('Deploy') {
             steps {
                 echo "Deploying"
+                echo "Your chosen colour is ${params.choose_colour}"
             }
         }
     }
